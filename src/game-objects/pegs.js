@@ -52,7 +52,7 @@ const PegsGI = {
       if (peg[3] > 0) {
         peg[3] -= 1;
       }
-    })
+    });
   },
   render: () => {
     let i = 0;

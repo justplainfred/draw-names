@@ -3,15 +3,16 @@ const PUCK_TIME_STEP = 0.05;
 const PUCK_RADIUS = 20;
 
 class Puck {
-  constructor (imgSrc, id, centerX, centerY) {
+  constructor (name) {
+    this.cousin = GetCousin(name);
     this._image = new Image();
-    this._image.src = imgSrc;
+    this._image.src = this.cousin.src;
     this._delete = false;
-    this.id = id;
-    this.centerX = centerX;
-    this.centerY = centerY;
+    this.id = this.cousin.name;
     this.canvas = document.getElementById('game-canvas');
     this.ctx = this.canvas.getContext('2d');
+    this.centerX = this.canvas.width / 2;
+    this.centerY = PEG_RADIUS;
     this.velocity_x = 25.0;
     this.velocity_y = 0.0;
     this.hasDropped = false;
@@ -20,7 +21,7 @@ class Puck {
   handleInput() { }
 
   update(elapsedMillis) {
-    if (this._hasLanded()) return;
+    if (this.hasLanded()) return;
     
     // Update the position
     this.centerX += this.velocity_x * PUCK_TIME_STEP
@@ -51,7 +52,7 @@ class Puck {
     this.hasDropped = true;
   }
 
-  _hasLanded () {
+  hasLanded () {
     return this.canvas.height - PUCK_RADIUS <= this.centerY 
   }
 
@@ -88,6 +89,18 @@ class Puck {
     this.ctx.restore();
   }
 
+  save() {
+    let receiver = this._getReceiver();
+    this.cousin.givesTo = receiver;
+    SetLeftColumn();
+    SetRightColumn();
+    this.delete();
+  }
+
+  _getReceiver() {
+    return GetCousinsNotYetGiving()[0].name;
+  }
+
   isFinished() {
     return this._delete;
   }
@@ -95,8 +108,17 @@ class Puck {
   delete() {
     this._delete = true;
   }
+
+
+  restart() {
+    this.centerX = this.canvas.width / 2;
+    this.centerY = PEG_RADIUS;
+    this.velocity_x = 25.0;
+    this.velocity_y = 0.0;
+    this.hasDropped = false;
+  }
 }
 
-var PuckFactory = function (imgSrc, id, centerX, centerY) {
-  return new Puck(imgSrc, id, centerX, centerY);
+var PuckFactory = function (name) {
+  return new Puck(name);
 }

@@ -24,24 +24,26 @@ setTimeout(() => {
       LOOP.addItem(ScreenCleanerGI);
       LOOP.addItem(PegsGI)
       SetLeftColumn();
-      SetRightColumn();
+      SetRightColumn();  
     },
     startWith: (name) => {
       if (this.activePuck) {
         this.activePuck.delete();
       }
-      let giver = GetGiver(name);
-      this.activePuck = PuckFactory(giver.src, giver.name, 250, PEG_RADIUS)
+      this.activePuck = PuckFactory(name)
       LOOP.addItem(this.activePuck);
     },
     restart: () => {
       if (this.activePuck) {
-        this.activePuck.delete();
+        this.activePuck.restart();
       }
-      this.activePuck = PuckFactory("./assets/Roxie.png", `roxie-${Math.random()}`, 250, PEG_RADIUS)
-      LOOP.addItem(this.activePuck);
+    },
+    next: () => {
+      if (!this.activePuck || !this.activePuck.hasLanded()) return;
+      this.activePuck.save();
     },
     dropPuck: () => {
+      if (!this.activePuck) return;
       this.activePuck.drop();
     }
   };

@@ -5,145 +5,145 @@ const Cousins = [
     name: "Weston",
     family: "Blake",
     givesTo: "GOD",
-    src: "./assets/Roxie.png",
+    src: "./assets/weston.png",
     disabled: false
   }, {
     name: "Onnika",
     family: "Blake",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/onnika.png",
     disabled: false
   }, {
     name: "Kaissa",
     family: "Blake",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/kaissa.png",
     disabled: false
   }, {
     name: "Melia",
     family: "Blake",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/melia.png",
     disabled: false
   }, {
     name: "Carisa",
     family: "Chrisdy",
     givesTo: "GOD",
-    src: "./assets/Roxie.png",
+    src: "./assets/carisa.png",
     disabled: false
   }, {
     name: "Shannon",
     family: "Chrisdy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/shannon.png",
     disabled: false
   }, {
     name: "Rachel",
     family: "Chrisdy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/rachel.png",
     disabled: false
   }, {
     name: "Luke",
     family: "Chrisdy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/luke.png",
     disabled: false
   }, {
     name: "Adam",
     family: "Chrisdy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/adam.png",
     disabled: false
   }, {
     name: "Elizabeth",
     family: "Chrisdy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/elizabeth.png",
     disabled: false
   }, {
     name: "Caleb",
     family: "Andy",
     givesTo: "GOD",
-    src: "./assets/Roxie.png",
+    src: "./assets/caleb.png",
     disabled: false
   }, {
     name: "MiCayla",
     family: "Andy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/micayla.png",
     disabled: false
   }, {
     name: "Dean",
     family: "Andy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/dean.png",
     disabled: false
   }, {
     name: "Hannah",
     family: "Andy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/hannah.png",
     disabled: false
   }, {
     name: "Emma",
     family: "Andy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/emma.png",
     disabled: false
   }, {
     name: "Phebe",
     family: "Andy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/phebe.png",
     disabled: false
   }, {
     name: "Abigale",
     family: "Andy",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/abigale.png",
     disabled: false
   }, {
     name: "Ashley",
     family: "Fred",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/ashley.png",
     disabled: false
   }, {
     name: "Elisa",
     family: "Fred",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/elisa.png",
     disabled: false
   }, {
     name: "Rebecca",
     family: "Fred",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/rebecca.png",
     disabled: false
   }, {
     name: "Ricky",
     family: "Fred",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/ricky.png",
     disabled: false
   }, {
     name: "Olivia",
     family: "Fred",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/olivia.png",
     disabled: false
   }, {
     name: "Ivy",
     family: "R. Jay",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/ivy.png",
     disabled: false
   }, {
     name: "Sage",
     family: "R. Jay",
     givesTo: "",
-    src: "./assets/Roxie.png",
+    src: "./assets/sage.png",
     disabled: false
   }
 ]
@@ -164,7 +164,7 @@ function RemoveGiverChoice (giver) {
   localStorage.removeItem(giver.name);
 }
 
-function GetGiver(name) {
+function GetCousin(name) {
   return Cousins.filter(c => c.name === name)[0];
 }
 
