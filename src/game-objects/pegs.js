@@ -1,20 +1,20 @@
-const PUCK_RADIUS_BUFFER = 50
+const PUCK_SIZE_BUFFER = 45
 const PEG_RADIUS = 10;
 
 const boardWidth = document.getElementById('game-canvas').width;
 const boardHeight = document.getElementById('game-canvas').height;
 
-const numPegs = 20;
+const numPegs = 25;
 
 function isValidPosition(x, y, pegs) {
-  if (x < PUCK_RADIUS_BUFFER && x > PEG_RADIUS) return false;
-  if (x > boardWidth - PUCK_RADIUS_BUFFER && x < boardWidth - PEG_RADIUS) return false;
-  if (y < PUCK_RADIUS_BUFFER * 1.25) return false;
-  if (y > boardHeight - PUCK_RADIUS_BUFFER * 2 ) return false;
+  if (x < PUCK_SIZE_BUFFER ) return false;
+  if (x > boardWidth - PUCK_SIZE_BUFFER) return false;
+  if (y < PUCK_SIZE_BUFFER * 1.25) return false;
+  if (y > boardHeight - PUCK_SIZE_BUFFER * 2 ) return false;
   for (const peg of pegs) {
     const [px, py, pr] = peg;
     const distance = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
-    if (distance < (PEG_RADIUS + PEG_RADIUS + PUCK_RADIUS_BUFFER)) {
+    if (distance < (PEG_RADIUS + PEG_RADIUS + PUCK_SIZE_BUFFER)) {
       return false;
     }
   }

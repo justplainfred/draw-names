@@ -25,7 +25,7 @@
           </ul>
       </div>
       <div class="center w3-green">
-        <canvas class="w3-border w3-margin" id="game-canvas" width="500" height="550"></canvas>
+        <canvas class="w3-border w3-margin" id="game-canvas" width="900" height="600"></canvas>
       </div>
       <div class="right-column w3-red">
           <ul id="cousins-done">
@@ -38,13 +38,14 @@
     <div class="w3-container w3-center w3-green">
       <button class="w3-button w3-blue" onclick="GAME.dropPuck()">Drop</button>
       <span>_____________</span>
-      <button class="w3-button w3-red" onclick="GAME.next()">Next</button>
+      <button class="w3-button w3-green" onclick="GAME.save()">Save</button>
     </div>
     <div class="w3-container w3-center w3-red">
       <button class="w3-button" onclick="PegsGI.reset()">Reset Pegs</button>
       <span>___________</span>
       <button class="w3-button" onclick="GAME.restart()">Restart</button>
     </div>
+    <script src="./game-objects/landing-pads.js" async="false"></script>
     <script src="./game-objects/family.js" async="false"></script>
     <script src="./game-objects/pegs.js" async="false"></script>
     <script src="./game-objects/game-loop.js" async="false"></script>

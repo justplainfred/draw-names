@@ -23,6 +23,7 @@ setTimeout(() => {
     load: () => {
       LOOP.addItem(ScreenCleanerGI);
       LOOP.addItem(PegsGI)
+      LOOP.addItem(LandingPad);
       SetLeftColumn();
       SetRightColumn();  
     },
@@ -32,13 +33,14 @@ setTimeout(() => {
       }
       this.activePuck = PuckFactory(name)
       LOOP.addItem(this.activePuck);
+      LandingPad.updatePadFor(GetCousin(name));
     },
     restart: () => {
       if (this.activePuck) {
         this.activePuck.restart();
       }
     },
-    next: () => {
+    save: () => {
       if (!this.activePuck || !this.activePuck.hasLanded()) return;
       this.activePuck.save();
     },

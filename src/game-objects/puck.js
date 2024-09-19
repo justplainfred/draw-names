@@ -53,7 +53,11 @@ class Puck {
   }
 
   hasLanded () {
-    return this.canvas.height - PUCK_RADIUS <= this.centerY 
+    if (!this._hasLanded && this.canvas.height - PUCK_RADIUS <= this.centerY) {
+      this._hasLanded = true;
+      LandingPad.setWinner(this.centerX);
+    }
+    return this._hasLanded;
   }
 
   _didCollide(pegX, pegY, pegR) {
@@ -90,15 +94,10 @@ class Puck {
   }
 
   save() {
-    let receiver = this._getReceiver();
-    this.cousin.givesTo = receiver;
+    this.cousin.givesTo = lp_winner.name;
     SetLeftColumn();
     SetRightColumn();
     this.delete();
-  }
-
-  _getReceiver() {
-    return GetCousinsNotYetGiving()[0].name;
   }
 
   isFinished() {
@@ -116,6 +115,7 @@ class Puck {
     this.velocity_x = 25.0;
     this.velocity_y = 0.0;
     this.hasDropped = false;
+    this._hasLanded = false;
   }
 }
 

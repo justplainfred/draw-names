@@ -6,152 +6,128 @@ const Cousins = [
     family: "Blake",
     givesTo: "GOD",
     src: "./assets/weston.png",
-    disabled: false
   }, {
     name: "Onnika",
     family: "Blake",
     givesTo: "",
     src: "./assets/onnika.png",
-    disabled: false
   }, {
     name: "Kaissa",
     family: "Blake",
     givesTo: "",
     src: "./assets/kaissa.png",
-    disabled: false
   }, {
     name: "Melia",
     family: "Blake",
     givesTo: "",
     src: "./assets/melia.png",
-    disabled: false
   }, {
     name: "Carisa",
     family: "Chrisdy",
     givesTo: "GOD",
     src: "./assets/carisa.png",
-    disabled: false
   }, {
     name: "Shannon",
     family: "Chrisdy",
     givesTo: "",
     src: "./assets/shannon.png",
-    disabled: false
   }, {
     name: "Rachel",
     family: "Chrisdy",
     givesTo: "",
     src: "./assets/rachel.png",
-    disabled: false
   }, {
     name: "Luke",
     family: "Chrisdy",
     givesTo: "",
     src: "./assets/luke.png",
-    disabled: false
   }, {
     name: "Adam",
     family: "Chrisdy",
     givesTo: "",
     src: "./assets/adam.png",
-    disabled: false
   }, {
     name: "Elizabeth",
     family: "Chrisdy",
     givesTo: "",
     src: "./assets/elizabeth.png",
-    disabled: false
   }, {
     name: "Caleb",
     family: "Andy",
     givesTo: "GOD",
     src: "./assets/caleb.png",
-    disabled: false
   }, {
     name: "MiCayla",
     family: "Andy",
     givesTo: "",
     src: "./assets/micayla.png",
-    disabled: false
   }, {
     name: "Dean",
     family: "Andy",
     givesTo: "",
     src: "./assets/dean.png",
-    disabled: false
   }, {
     name: "Hannah",
     family: "Andy",
     givesTo: "",
     src: "./assets/hannah.png",
-    disabled: false
   }, {
     name: "Emma",
     family: "Andy",
     givesTo: "",
     src: "./assets/emma.png",
-    disabled: false
   }, {
     name: "Phebe",
     family: "Andy",
     givesTo: "",
     src: "./assets/phebe.png",
-    disabled: false
   }, {
     name: "Abigale",
     family: "Andy",
     givesTo: "",
     src: "./assets/abigale.png",
-    disabled: false
   }, {
     name: "Ashley",
     family: "Fred",
     givesTo: "",
     src: "./assets/ashley.png",
-    disabled: false
   }, {
     name: "Elisa",
     family: "Fred",
     givesTo: "",
     src: "./assets/elisa.png",
-    disabled: false
   }, {
     name: "Rebecca",
     family: "Fred",
     givesTo: "",
     src: "./assets/rebecca.png",
-    disabled: false
   }, {
     name: "Ricky",
     family: "Fred",
     givesTo: "",
     src: "./assets/ricky.png",
-    disabled: false
   }, {
     name: "Olivia",
     family: "Fred",
     givesTo: "",
     src: "./assets/olivia.png",
-    disabled: false
   }, {
     name: "Ivy",
     family: "R. Jay",
     givesTo: "",
     src: "./assets/ivy.png",
-    disabled: false
   }, {
     name: "Sage",
     family: "R. Jay",
     givesTo: "",
     src: "./assets/sage.png",
-    disabled: false
   }
 ]
 
 const NotParticipating = [
-  // "Weston",
-  // "Carisa",
-  // "Caleb",
+  "Weston",
+  "Carisa",
+  "Caleb",
 ]
 
 function SetGiverChoice (giver, receiver) {
@@ -169,12 +145,25 @@ function GetCousin(name) {
 }
 
 function GetPossibleRecipients (giver) {
-  return Cousins.filter(cousin => {
-    if (cousin.disabled == true) return false;
+  return GetCousinsNotYetReceiving().filter(cousin => {
     if (cousin.family == giver.family) return false;
     if (NotParticipating.indexOf(cousin.name) > -1) return false;
     return true;
   });
+}
+
+function GetCousinsNotYetReceiving () {
+  const receivers = Cousins.map(c => c.givesTo).filter(r => r !== "");
+  return Cousins
+    .filter(c => receivers.indexOf(c.name) === -1)
+    .filter(c => NotParticipating.indexOf(c.name) === -1);
+}
+
+function GetCousinsReceiving () {
+  const receivers = Cousins.map(c => c.givesTo).filter(r => r !== "");
+  return Cousins
+    .filter(c => receivers.indexOf(c.name) !== -1)
+    .filter(c => NotParticipating.indexOf(c.name) === -1);
 }
 
 function GetCousinsNotYetGiving() {
