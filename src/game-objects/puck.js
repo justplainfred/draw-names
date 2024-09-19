@@ -37,6 +37,7 @@ class Puck {
       if (this._didCollide(x, y, radius)) {
         Pegs[i][3] = 10;
         this._handleCollision(x, y)
+        document.getElementById(`ow${Math.floor(Math.random() * 6) + 1}`).play();
       }
     }
 
