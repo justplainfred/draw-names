@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-column, .right-column {
+  flex: 1; /* Take up equal space */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.center {
+  flex: 2; /* Canvas area takes up more space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 5px 0;
+}

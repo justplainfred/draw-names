@@ -1,51 +1,60 @@
 const GRAVITY = 9.81;
-const PUCK_TIME_STEP = 0.07;
+const PUCK_TIME_STEP = 0.05;
 const PUCK_RADIUS = 20;
 
 class Puck {
   constructor (imgSrc, id, centerX, centerY) {
     this._image = new Image();
     this._image.src = imgSrc;
+    this._delete = false;
     this.id = id;
     this.centerX = centerX;
     this.centerY = centerY;
     this.canvas = document.getElementById('game-canvas');
     this.ctx = this.canvas.getContext('2d');
-    this.velocity_x = 0.0;
+    this.velocity_x = 25.0;
     this.velocity_y = 0.0;
-    this.collisions = [];
+    this.hasDropped = false;
   }
 
   handleInput() { }
 
   update(elapsedMillis) {
-    if (elapsedMillis > 1000000) return;
     if (this._hasLanded()) return;
-    this.collisions = [];
-
+    
     // Update the position
     this.centerX += this.velocity_x * PUCK_TIME_STEP
     this.centerY += this.velocity_y * PUCK_TIME_STEP
-
-    // Update the velocity due to GRAVITY
-    this.velocity_y += GRAVITY * PUCK_TIME_STEP
     
-    for (const [x, y, radius] of Pegs) {
-      if (this._checkCollision(x, y, radius)) {
+    if (this.hasDropped) {
+      // Update the velocity due to GRAVITY
+      this.velocity_y += GRAVITY * PUCK_TIME_STEP
+    }
+    
+    // Check For peg collisions
+    for (let i = 0; i < Pegs.length; ++i) {
+      const [x, y, radius] = Pegs[i]
+      if (this._didCollide(x, y, radius)) {
+        Pegs[i][3] = 10;
         this._handleCollision(x, y)
       }
     }
-    
+
+    // check for wall collisions
     if (this.centerX < PUCK_RADIUS  || this.centerX > boardWidth - PUCK_RADIUS) {
       this.velocity_x *= -1;
     }
+  }
+
+  drop () {
+    this.hasDropped = true;
   }
 
   _hasLanded () {
     return this.canvas.height - PUCK_RADIUS <= this.centerY 
   }
 
-  _checkCollision(pegX, pegY, pegR) {
+  _didCollide(pegX, pegY, pegR) {
     let distance = Math.sqrt(((this.centerX - pegX) * (this.centerX - pegX) + (this.centerY - pegY) * (this.centerY - pegY)))
     return distance < pegR + PUCK_RADIUS;
   }
@@ -76,22 +85,14 @@ class Puck {
     this.ctx.drawImage(this._image, this.centerX - PUCK_RADIUS, this.centerY - PUCK_RADIUS, PUCK_RADIUS * 2, PUCK_RADIUS * 2);
 
     this.ctx.restore();
-    
-    this._drawPegs();
-  }
-
-  _drawPegs() {
-    for (const [x, y, radius] of Pegs) {
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, 2 * Math.PI);
-      ctx.fillStyle = 'blue';
-      ctx.fill();
-      ctx.stroke();
-    }
   }
 
   isFinished() {
+    return this._delete;
+  }
 
+  delete() {
+    this._delete = true;
   }
 }
 
