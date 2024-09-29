@@ -70,24 +70,23 @@ function closeModel() {
 }
 
 function RandomResets() {
+  let dropper = window.activePuck.cousin
   for (var i = 0; i < 3; ++i) {
     let hasReset = false;
     let receivers = GetCousinsReceiving();
-    while (!hasReset || receivers.length !== 0) {
-      r = Math.floor((Math.random() * 100) % receivers.length);
-      let receiver = receivers[r];
-      if (receiver.family !== window.activePuck.cousin.family) {
-        let givers = GetCousinsGiving();
-        let giver = givers.find(g => g.givesTo === receiver.name)
-        giver.givesTo = "";
-        hasReset = true;
+    if (receivers.length !== 0) {
+      while (!hasReset) {
+        r = Math.floor((Math.random() * 100) % receivers.length);
+        let randomReceiver = receivers[r];
+        if (randomReceiver.family !== dropper.family) {
+          let giverOfReceiver = GetCousinsGiving().find(g => g.givesTo === randomReceiver.name)
+          giverOfReceiver.givesTo = "";
+          hasReset = true;
+        }
       }
     }
   }
   SetLeftColumn();
   SetRightColumn();
-}
-
-function RandomReset() {
-
+  LandingPad.updatePadFor(dropper);
 }

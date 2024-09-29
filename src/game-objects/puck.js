@@ -120,6 +120,7 @@ class Puck {
   }
 
   save() {
+    if (!lp_winner) return;
     this.cousin.givesTo = lp_winner.name;
     SetLeftColumn();
     SetRightColumn();
