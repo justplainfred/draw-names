@@ -2,6 +2,24 @@ const GRAVITY = 9.81;
 const PUCK_TIME_STEP = 0.05;
 const PUCK_RADIUS = 20;
 
+const wins = [
+  new Audio('./assets/win.mp3'),
+  new Audio('./assets/win.mp3'),
+  new Audio('./assets/win.mp3'),
+  new Audio('./assets/win.mp3'),
+]
+let winIndex = 0;
+
+const bells = [
+  new Audio('./assets/bell2.mp3'),
+  new Audio('./assets/bell3.mp3'),
+  new Audio('./assets/bell4.mp3'),
+  new Audio('./assets/bell2.mp3'),
+  new Audio('./assets/bell3.mp3'),
+  new Audio('./assets/bell4.mp3'),
+]
+let bellsIndex = 0;
+
 class Puck {
   constructor (name) {
     this.cousin = GetCousin(name);
@@ -38,7 +56,9 @@ class Puck {
       if (this._didCollide(x, y, radius)) {
         Pegs[i][3] = 10;
         this._handleCollision(x, y)
-        document.getElementById(`ow${Math.floor(Math.random() * 6) + 1}`).play();
+        const random = Math.floor(Math.random() * 3) + 2;
+        bells[bellsIndex].play();
+        bellsIndex = (bellsIndex + 1) % bells.length;
       }
     }
 
@@ -56,6 +76,9 @@ class Puck {
     if (!this._hasLanded && this.canvas.height - PUCK_RADIUS <= this.centerY) {
       this._hasLanded = true;
       LandingPad.setWinner(this.centerX);
+      openModel(this.cousin.name, lp_winner.name);
+      wins[winIndex].play();
+      winIndex = (winIndex + 1) % wins.length;
     }
     return this._hasLanded;
   }
@@ -97,6 +120,7 @@ class Puck {
     this.cousin.givesTo = lp_winner.name;
     SetLeftColumn();
     SetRightColumn();
+    GAME.startWith(lp_winner.name);
     this.delete();
   }
 

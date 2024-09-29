@@ -27,7 +27,7 @@ const Cousins = [
     givesTo: "GOD",
     src: "./assets/carisa.png",
   }, {
-    name: "Shannon",
+    name: "Shannon and Zach",
     family: "Chrisdy",
     givesTo: "",
     src: "./assets/shannon.png",
@@ -82,7 +82,7 @@ const Cousins = [
     givesTo: "",
     src: "./assets/phebe.png",
   }, {
-    name: "Abigale",
+    name: "Abigail",
     family: "Andy",
     givesTo: "",
     src: "./assets/abigale.png",
@@ -117,7 +117,7 @@ const Cousins = [
     givesTo: "",
     src: "./assets/ivy.png",
   }, {
-    name: "Sage",
+    name: "Sage and Baby",
     family: "R. Jay",
     givesTo: "",
     src: "./assets/sage.png",
@@ -198,7 +198,7 @@ function SetLeftColumn () {
   const cousins = GetCousinsNotYetGiving();
   const list = cousins.map(c => {
     return CreateListItem(c.name);
-  })
+  });
   let ul = document.getElementById("cousins-todo");
   ul.innerHTML = "";
   for (const li of list) {
@@ -210,14 +210,16 @@ function CreateListItem (giver, receiver) {
   if (receiver) {
     const li = document.createElement('li');
     li.className = "w3-container w3-green w3-center"
-    li.textContent = `${giver} gives to ${receiver}`
+    li.textContent = `${giver} 👉 ${receiver}`
       return li
   }
   const btn = document.createElement('button');
   btn.textContent = giver;
   btn.className = "w3-button w3-green"
   btn.onclick = () => {
-    GAME.startWith(giver);
+    if (!window.activePuck || window.activePuck.id !== giver) {
+      GAME.startWith(giver);
+    }
   }
   return btn
 }

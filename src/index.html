@@ -7,38 +7,44 @@
     <link rel="stylesheet" href="./assets/custom.css">
   </head>
   <body>
-    <audio id="ow1" src="./assets/ow1.m4a" preload="auto"></audio>
-    <audio id="ow2" src="./assets/ow2.m4a" preload="auto"></audio>
-    <audio id="ow3" src="./assets/ow3.m4a" preload="auto"></audio>
-    <audio id="ow4" src="./assets/ow4.m4a" preload="auto"></audio>
-    <audio id="ow5" src="./assets/ow5.m4a" preload="auto"></audio>
-    <audio id="ow6" src="./assets/ow6.m4a" preload="auto"></audio>
     <div class="w3-container w3-red w3-center">
-      <h1>PLINKO</h1>
+      <h1 id="big-title">PLINKO</h1>
       <h2>2024 Christensen Christmas Family Drawing</h2>
+    </div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+          <h1>Congratulations!!</h1>
+          <span class="close" onclick="GAME.save()">&times;</span>
+          <div class="names">
+              <div class="name" id="giver"></div>
+              <div class="arrow">👉 👉 👉 👉 👉</div>
+              <div class="name" id="receiver"></div>
+          </div>
+      </div>
     </div>
 
     <div class="container w3-green">
       <div class="left-column w3-red">
-          <ul id="cousins-todo">
-              
-          </ul>
+        <div>COUSINS WHO STILL NEED TO DRAW</div>
+        <ul id="cousins-todo">
+            
+        </ul>
       </div>
       <div class="center w3-green">
         <canvas class="w3-border w3-margin" id="game-canvas" width="900" height="600"></canvas>
       </div>
       <div class="right-column w3-red">
-          <ul id="cousins-done">
+        <div>GIVER 👉 RECEIVER</div>  
+        <ul id="cousins-done">
               
-          </ul>
+        </ul>
       </div>
     </div>
 
     </div>
     <div class="w3-container w3-center w3-green">
       <button class="w3-button w3-blue" onclick="GAME.dropPuck()">Drop</button>
-      <span>_____________</span>
-      <button class="w3-button w3-green" onclick="GAME.save()">Save</button>
     </div>
     <div class="w3-container w3-center w3-red">
       <button class="w3-button" onclick="PegsGI.reset()">Reset Pegs</button>
