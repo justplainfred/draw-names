@@ -8,17 +8,13 @@ const wins = [
   new Audio('./assets/win.mp3'),
   new Audio('./assets/win.mp3'),
 ]
-let winIndex = 0;
 
 const bells = [
+  new Audio('./assets/bell1.mp3'),
   new Audio('./assets/bell2.mp3'),
   new Audio('./assets/bell3.mp3'),
-  new Audio('./assets/bell4.mp3'),
-  new Audio('./assets/bell2.mp3'),
-  new Audio('./assets/bell3.mp3'),
-  new Audio('./assets/bell4.mp3'),
 ]
-let bellsIndex = 0;
+let bellsIndex = 1;
 
 class Puck {
   constructor (name) {
@@ -57,8 +53,10 @@ class Puck {
         Pegs[i][3] = 10;
         this._handleCollision(x, y)
         const random = Math.floor(Math.random() * 3) + 2;
-        bells[bellsIndex].play();
-        bellsIndex = (bellsIndex + 1) % bells.length;
+        let bell = bells.shift();
+        bell.play();
+        bells.push(new Audio(`./assets/bell${bellsIndex}.mp3`));
+        bellsIndex = ((bellsIndex + 1) % bells.length) + 1;
       }
     }
 
@@ -69,7 +67,11 @@ class Puck {
   }
 
   drop () {
-    this.hasDropped = true;
+    if (lp_hopefuls.length === 0) {
+      window.alert("We have to make a change.  A few random people will be put back into the pool.")
+    } else {
+      this.hasDropped = true;
+    }
   }
 
   hasLanded () {
@@ -77,8 +79,9 @@ class Puck {
       this._hasLanded = true;
       LandingPad.setWinner(this.centerX);
       openModel(this.cousin.name, lp_winner.name);
-      wins[winIndex].play();
-      winIndex = (winIndex + 1) % wins.length;
+      let hohoho = wins.shift();
+      hohoho.play();
+      wins.push( new Audio('./assets/win.mp3'))
     }
     return this._hasLanded;
   }
@@ -120,7 +123,11 @@ class Puck {
     this.cousin.givesTo = lp_winner.name;
     SetLeftColumn();
     SetRightColumn();
-    GAME.startWith(lp_winner.name);
+    let givers = GetCousinsGiving()
+    if (!givers.find(c => c.name === lp_winner.name)) {
+      GAME.startWith(lp_winner.name);
+    }
+    lp_winner == null;
     this.delete();
   }
 

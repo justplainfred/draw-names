@@ -4,7 +4,7 @@ const PEG_RADIUS = 10;
 const boardWidth = document.getElementById('game-canvas').width;
 const boardHeight = document.getElementById('game-canvas').height;
 
-const numPegs = 25;
+const numPegs = 1;
 
 function isValidPosition(x, y, pegs) {
   if (x < PUCK_SIZE_BUFFER ) return false;

@@ -68,3 +68,26 @@ function openModel(giver, receiver) {
 function closeModel() {
   document.getElementById("myModal").style.display = "none";
 }
+
+function RandomResets() {
+  for (var i = 0; i < 3; ++i) {
+    let hasReset = false;
+    let receivers = GetCousinsReceiving();
+    while (!hasReset || receivers.length !== 0) {
+      r = Math.floor((Math.random() * 100) % receivers.length);
+      let receiver = receivers[r];
+      if (receiver.family !== window.activePuck.cousin.family) {
+        let givers = GetCousinsGiving();
+        let giver = givers.find(g => g.givesTo === receiver.name)
+        giver.givesTo = "";
+        hasReset = true;
+      }
+    }
+  }
+  SetLeftColumn();
+  SetRightColumn();
+}
+
+function RandomReset() {
+
+}
